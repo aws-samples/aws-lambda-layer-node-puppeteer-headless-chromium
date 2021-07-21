@@ -9,14 +9,29 @@ Parameters:
     Default: https://aws.amazon.com/kendra/faqs/,https://aws.amazon.com/lex/faqs/,https://aws.amazon.com/comprehend/faqs/
     Description: A comma separate list of URLS to crawl.  The pages can either be HTML or PDFs
 Resources:
+  PuppeteerHeadlessChromium:
+    Type: AWS::Serverless::LayerVersion
+    Properties: 
+      CompatibleRuntimes:
+        - nodejs12.x
+      ContentUri: ./src/puppeteer
+      Description: Lambda layer to execute Puppeteer on headless chromium
+      LayerName: puppeteer-headless-chromium-node
+      LicenseInfo: MIT-0
+      RetentionPolicy: Delete
+    Metadata:
+      BuildMethod: nodejs12.x
   CrawlPage:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x
+      FunctionName: CrawlPage
       Timeout: 900
       MemorySize: 1024
-      CodeUri: ./src
+      CodeUri: ./src/lambda
+      Layers:
+        - !Ref PuppeteerHeadlessChromium
       Environment:
         Variables:
           URLS: !Ref URLs
