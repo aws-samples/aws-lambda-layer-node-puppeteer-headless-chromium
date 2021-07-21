@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters: 
+  CrawlSchedule:
+    Type: String
+    Default: rate(1 day)
+  URLs: 
+    Type: String
+    Default: https://aws.amazon.com/kendra/faqs/,https://aws.amazon.com/lex/faqs/,https://aws.amazon.com/comprehend/faqs/
+    Description: A comma separate list of URLS to crawl.  The pages can either be HTML or PDFs
+Resources:
+  CrawlPage:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Timeout: 900
+      MemorySize: 1024
+      CodeUri: ./src
+      Environment:
+        Variables:
+          URLS: !Ref URLs
+      Events:
+        CrawlPageEvent:
+          Type: Schedule
+          Properties:
+              Schedule: !Ref CrawlSchedule

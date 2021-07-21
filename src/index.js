@@ -5,14 +5,10 @@ const pdfreader = require("pdfreader");
 const crypto = require("crypto");
 const { url } = require("inspector");
 
-var browser = null;
-var page = null;
-var pageCount = 0;
+
 async function getPage(url) {
-  let result = null;
-  let page = {};
+
   try {
-    if (browser == null || page == null) {
       browser = await chromium.puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
@@ -21,9 +17,7 @@ async function getPage(url) {
         ignoreHTTPSErrors: true,
       });
       page = await browser.newPage();
-    }
-
-    await page.goto(url,{ waitUntil: 'networkidle0' });
+      await page.goto(url,{ waitUntil: 'networkidle0' });
 
     return page
   } catch (error) {
@@ -112,7 +106,11 @@ exports.handler = async (event, context, callback) => {
   pageCount = 0;
   console.log("Incoming event " + JSON.stringify(event));
   try {
-    await indexPages(event.urls);
+    await crawlPages(process.env.URLS.split(","),(data) => {
+      let filename = "/tmp/"+data.title+".html"
+      console.log("Writing " + filename )
+      fs.writeFileSync(filename,data.content)
+    });
     return;
   } catch (err) {
     console.log(err);
