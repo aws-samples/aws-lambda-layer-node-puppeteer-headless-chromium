@@ -3,13 +3,11 @@
 This repository provides an AWS Lambda layer that can run [Puppeteer](https://developers.google.com/web/tools/puppeteer) in
 a headless chromium browser, a utility library and a sample Lambda with an AWS CloudFormation template.
 
-
 ## Prerequisites
 
 - The [AWS CLI](https://www.python.org/downloads/)
 - The [AWS Serverless Application Model](https://docs.aws.amazon.com/serverless-application-model/index.html) must be [installed](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 - [Node 12.x](https://nodejs.org/en/download/)
-
 
 ## Building
 
@@ -21,7 +19,6 @@ sam deploy --template-file .aws-sam/build/template.yaml --stack-name lambda-craw
 ```
 
 ## Usage
-
 
 ### Using the included Crawler library
 
@@ -42,6 +39,7 @@ exports.handler = async (event, context, callback) => {
   }
 };
 ```
+
 The ```crawler``` function takes two parameters:
 
 - an array of URLs to crawl.  The pages can either be regular web pages or PDF files.
@@ -49,12 +47,11 @@ The ```crawler``` function takes two parameters:
 
 ```data``` will  contains five properties after the page is loaded:
 
-- id - a hash value of the url. Use a short reference for the page
+- id - a short hash of the url.
 - url - the url of the page that was crawled
 - title - the page title for HTML or the name of the PDF
 - content - the content of the page
 - page - the [Puppeteer page object](https://pptr.dev/#?product=Puppeteer&version=v10.1.0&show=api-class-page)
-
 
 ### CrawlPage sample Lambda
 
@@ -67,6 +64,3 @@ You can use Puppeteer directly by adding a require statement at the beginning of
 ``` const puppeteer = require("puppeteer") ```
 
 See the [official web site](https://developers.google.com/web/tools/puppeteer) for usage.
-
-
-
