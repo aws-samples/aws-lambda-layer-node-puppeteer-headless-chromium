@@ -55,7 +55,7 @@ The ```crawler``` function takes two parameters:
 
 ### CrawlPage sample Lambda
 
-The CrawlPage sample Lambda simply crawls the pages specified by the ```URLS`` environment variable and saves the content to the local filesystem on a schedule using CloudWatch Events.
+The CrawlPage sample Lambda simply crawls the pages specified by the ```URLS``` environment variable and saves the content to the local filesystem on a schedule using CloudWatch Events.
 
 ### Using the Puppeteer module directly
 
