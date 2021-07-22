@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 const chromium = require("chrome-aws-lambda");
 const fs = require('fs')
 const https = require("https");
@@ -8,14 +11,14 @@ const crypto = require("crypto");
 async function getPage(url) {
 
   try {
-      browser = await chromium.puppeteer.launch({
+      let browser = await chromium.puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath,
         headless: chromium.headless,
         ignoreHTTPSErrors: true,
       });
-      page = await browser.newPage();
+      let page = await browser.newPage();
       await page.goto(url,{ waitUntil: 'networkidle0' });
 
     return page
@@ -33,7 +36,6 @@ async function getPage(url) {
 async function getTextFromPDF(url) {
     var pdfBuffer = await bufferize(url);
     var pdfParagraphs = await readlines(pdfBuffer);
-    console.log(JSON.stringify(pdfParagraphs));
     var allLines = pdfParagraphs.flat(5);
     return allLines.join("\n");
   }
@@ -148,17 +150,4 @@ module.exports = async function(urls,callback=undefined) {
     console.log(err);
     throw err;
   }
-}
-
-const isLambda = !!process.env.LAMBDA_TASK_ROOT;
-if(!isLambda){
-  (async () => {
-      urls = [
-          "https://aws.amazon.com/kendra/faqs/",
-          "https://aws.amazon.com/lex/faqs/",
-          "https://aws.amazon.com/comprehend/faqs/"
-
-      ]
-      crawlPages(urls,(data) => fs.writeFileSync(data.title+".html",data.content) )
-  })();
 }

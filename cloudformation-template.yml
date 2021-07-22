@@ -14,6 +14,7 @@ Resources:
     Properties: 
       CompatibleRuntimes:
         - nodejs12.x
+        - nodejs14.x
       ContentUri: ./src/puppeteer
       Description: Lambda layer to execute Puppeteer on headless chromium
       LayerName: puppeteer-headless-chromium-node
@@ -25,9 +26,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: 
-        - nodejs12.x
-        - nodejs14.x
+      Runtime: nodejs12.x
+
       FunctionName: CrawlPage
       Timeout: 900
       MemorySize: 1024
