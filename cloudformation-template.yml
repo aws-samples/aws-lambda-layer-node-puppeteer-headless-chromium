@@ -15,7 +15,7 @@ Resources:
       CompatibleRuntimes:
         - nodejs12.x
         - nodejs14.x
-      ContentUri: ./src/puppeteer
+      ContentUri: ./src/layer
       Description: Lambda layer to execute Puppeteer on headless chromium
       LayerName: puppeteer-headless-chromium-node
       LicenseInfo: MIT-0
