@@ -45,7 +45,7 @@ The ```crawler``` function takes two parameters:
 - an array of URLs to crawl.  The pages can either be regular web pages or PDF files.
 - a callback function with one parameter -- ```data```
 
-```data``` will  contains five properties after the page is loaded:
+```data``` will  contain five properties after the page is loaded:
 
 - id - a short hash of the url.
 - url - the url of the page that was crawled
