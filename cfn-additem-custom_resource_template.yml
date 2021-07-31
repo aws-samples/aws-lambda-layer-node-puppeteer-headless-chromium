@@ -1,0 +1,39 @@
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# limitations under the License.
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Cloudformation custom resource to deploy CFNDDBAddItem
+
+Resources:  
+
+  DDBAddItemCustomResource:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: DDBAddItemCustomResource
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: ./src/custom-resources/cfn-dynamodb-add-item
+      Description: 'custom cloudformation resource used to deploy Lex aliases'
+      MemorySize: 256
+      Timeout: 300
+      Policies:
+        - Statement: 
+          - Sid: DynampDB
+            Effect: "Allow"
+            Action: 
+            - dynamodb:PutItem
+            Resource: !Sub "arn:aws:dynamodb:*:${AWS::AccountId}:table/*"   
+            
+Outputs:
+  CFNDDBAddItem:
+    Description: Custom resource to add DynamoDB items to an existing database
+    Value:
+      Fn::GetAtt:
+      - DDBAddItemCustomResource
+      - Arn
+    Export:
+      Name: CFNDDBAddItem

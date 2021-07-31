@@ -1,0 +1,8 @@
+{
+    "TableName":"CFNDDBAddItemSampleTable",
+    "Output":{
+        "Filename": "ddb-items.json",
+        "TableName":"CFNDDBAddItemSampleTable2",
+        "TemplateDescription":"Sample exported template"
+    }
+}

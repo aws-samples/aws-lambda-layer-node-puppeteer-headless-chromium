@@ -1,0 +1,16 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Sample exported template",
+    "Resources": {
+        "DBItem1": {
+            "Type": "Custom::DynampDBItem",
+            "Properties": {
+                "ServiceToken": {
+                    "Fn::ImportValue": "CFNDDBAddItem"
+                },
+                "TableName": "CFNDDBAddItemSampleTable2",
+                "Item": "{\"year\": 2013, \"info\": {\"actors\": [\"David Matthewman\", \"Ann Thomas\", \"Jonathan G. Neff\"], \"release_date\": \"2013-01-18T00:00:00Z\", \"plot\": \"A rock band plays their music at high volumes, annoying the neighbors.\", \"genres\": [\"Comedy\", \"Drama\"], \"image_url\": \"http://ia.media-imdb.com/images/N/O9ERWAU7FS797AJ7LU8HN09AMUP908RLlo5JF90EWR7LJKQ7@@._V1_SX400_.jpg\", \"directors\": [\"Alice Smith\", \"Bob Jones\"], \"rating\": 6.2, \"rank\": 11, \"running_time_secs\": 5215}, \"title\": \"Turn It Down, Or Else!\"}"
+            }
+        }
+    }
+}
