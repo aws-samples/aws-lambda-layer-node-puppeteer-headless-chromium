@@ -3,7 +3,7 @@
 This repository provides an AWS Lambda layer that can run [Puppeteer](https://developers.google.com/web/tools/puppeteer) in
 a headless chromium browser, a utility library and a sample Lambda with an AWS CloudFormation template.
 
-## Prerequisites
+## Requirements
 
 - The [AWS CLI](https://www.python.org/downloads/)
 - The [AWS Serverless Application Model](https://docs.aws.amazon.com/serverless-application-model/index.html) must be [installed](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
