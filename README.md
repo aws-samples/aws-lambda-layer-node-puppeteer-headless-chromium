@@ -1,5 +1,6 @@
 # Puppeteer/Node Headless Chromium Lambda Layer
 
+## Purpose 
 This repository provides an AWS Lambda layer that can run [Puppeteer](https://developers.google.com/web/tools/puppeteer) in
 a headless chromium browser, a utility library and a sample Lambda with an AWS CloudFormation template.
 
