@@ -9,12 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chrome-aws-lambda": "^10.1.0",
-    "pdfreader": "^1.2.10",
-    "puppeteer-core": "^10.1.0"
+    "chrome-aws-lambda": "^9.1.0",
+    "pdfreader": "^2.0.0",
+    "puppeteer-core": "^15.1.1"
   },
   "devDependencies": {
     "chromium": "^3.0.2",
-    "puppeteer": "^10.1.0"
+    "puppeteer": "^15.1.1"
   }
 }
